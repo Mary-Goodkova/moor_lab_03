@@ -9,7 +9,7 @@ def check_validation(line):
     else:
         if '<=' in line or '>=' in line:
             return
-    raise Exception('wrong format of input data')
+    raise Exception('Wrong format of input data')
 
 
 def parse(line):
