@@ -1,7 +1,8 @@
 from init import SimplexTable
 
 if __name__ == '__main__':
-    filename = 'input.txt'
+    filename = 'input1.txt'
     data = [line.replace('\n', '') for line in open(filename)]
     s_t = SimplexTable(data)
-    print(s_t)
+    s_t.solve()
+    # print(s_t)

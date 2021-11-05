@@ -31,17 +31,21 @@ def parse(line):
     for term in terms:
         split_term = term.split('x')
         split_term[0], split_term[1] = int(split_term[1]), split_term[0]
-        for i in range(len(split_term)):
-            if not split_term[i]:
-                split_term[i] = '1'
-            elif split_term[i] == '-':
-                split_term[i] = '-1'
+        # for i in range(len(split_term)):
+        #     if not split_term[i]:
+        #         split_term[i] = '1'
+        #     elif split_term[i] == '-':
+        #         split_term[i] = '-1'
+        if not split_term[1]:
+            split_term[1] = '1'
+        elif split_term[1] == '-':
+            split_term[1] = '-1'
         vec.append([i for i in split_term])
     vec.append([-1, target])
     vec = dict(vec)
     for ind in vec:
         vec[ind] = float(vec[ind]) * flag
-    return dict(sorted(vec.items(), key=lambda i: i[0]))
+    return vec
 
 
 def get_lines(rows):
@@ -51,4 +55,5 @@ def get_lines(rows):
         for var in range(1, variables + 1):
             if var not in row.keys():
                 row[var] = 0
+    rows = [dict(sorted(row.items(), key=lambda i: i[0])) for row in rows]
     return rows
