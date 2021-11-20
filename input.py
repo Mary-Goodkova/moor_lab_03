@@ -1,6 +1,8 @@
+# Copyright 2021 Peter p.makretskii@gmail.com
 import re
 
 
+# функция проверки строки из файла с условиями задачи
 def check_validation(line):
     if 'F' in line:
         if 'max' in line or 'min' in line:
@@ -12,6 +14,7 @@ def check_validation(line):
     raise Exception('Wrong format of input data')
 
 
+# функция парсинга строки из файла с условиями; на выходе словарь с ключом - индексом переменной
 def parse(line):
     check_validation(line)
     if 'F' in line:
@@ -31,11 +34,6 @@ def parse(line):
     for term in terms:
         split_term = term.split('x')
         split_term[0], split_term[1] = int(split_term[1]), split_term[0]
-        # for i in range(len(split_term)):
-        #     if not split_term[i]:
-        #         split_term[i] = '1'
-        #     elif split_term[i] == '-':
-        #         split_term[i] = '-1'
         if not split_term[1]:
             split_term[1] = '1'
         elif split_term[1] == '-':
@@ -44,10 +42,12 @@ def parse(line):
     vec.append([-1, target])
     vec = dict(vec)
     for ind in vec:
-        vec[ind] = float(vec[ind]) * flag
+        if ind != -1:
+            vec[ind] = float(vec[ind]) * flag
     return vec
 
 
+# функция чтения данных из файла с условиями, их парсинга и получения симплекс-таблицы в виде списка словарей
 def get_lines(rows):
     rows = [parse(row) for row in rows]
     variables = max([max(i.keys()) for i in rows])
@@ -55,5 +55,4 @@ def get_lines(rows):
         for var in range(1, variables + 1):
             if var not in row.keys():
                 row[var] = 0
-    rows = [dict(sorted(row.items(), key=lambda i: i[0])) for row in rows]
-    return rows
+    return [dict(sorted(row.items(), key=lambda i: i[0])) for row in rows]
