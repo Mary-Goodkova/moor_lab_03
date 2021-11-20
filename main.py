@@ -1,5 +1,5 @@
 # Copyright 2021 Peter p.makretskii@gmail.com
-from init import SimplexTable, solve_in_integer
+from simplex_table import SimplexTable, solve_in_integer
 from input import print_answer
 
 # точка входа в программу
