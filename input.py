@@ -56,3 +56,15 @@ def get_lines(rows):
             if var not in row.keys():
                 row[var] = 0
     return [dict(sorted(row.items(), key=lambda i: i[0])) for row in rows]
+
+
+# функция печати ответа
+def print_answer(result):
+    if type(result) is tuple:
+        print('The answer is:')
+        for i in range(len(result[0])):
+            print(f'x{i + 1} = {result[0][i]}')
+        print(f'F = {result[1]}')
+    else:
+        print(result)
+    return type(result) is tuple
